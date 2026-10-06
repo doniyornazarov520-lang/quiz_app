@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
@@ -51,45 +52,17 @@ QUESTIONS_DATA = {
             {"id": 5, "question": "36 : 4 bo'linma nechiga teng?", "options": ["9", "8", "7", "6"], "answer": "9"},
             {"id": 6, "question": "Eng kichik juft son qaysi?", "options": ["2", "0", "1", "4"], "answer": "2"},
             {"id": 7, "question": "15 ning yarmi nechaga teng?", "options": ["7.5", "7", "8", "6.5"], "answer": "7.5"},
-            {"id": 8, "question": "5 ning kvadrati ($5^2$) nechaga teng?", "options": ["25", "10", "15", "20"], "answer": "25"},
+            {"id": 8, "question": r"5 ning kvadrati ($5^2$) nechaga teng?", "options": ["25", "10", "15", "20"], "answer": "25"},
             {"id": 9, "question": "100 metr necha santimetr?", "options": ["10000", "1000", "100", "10"], "answer": "10000"},
             {"id": 10, "question": "3 x 0 + 5 javobi nechiga teng?", "options": ["5", "0", "3", "8"], "answer": "5"}
         ],
         "medium": [
             {"id": 1, "question": "Tenglamani yeching: 2x + 10 = 20. x = ?", "options": ["5", "10", "2", "8"], "answer": "5"},
             {"id": 2, "question": "Uchburchak ichki burchaklari yig'indisi necha daraja?", "options": ["180", "360", "90", "270"], "answer": "180"},
-            {"id": 3, "question": "$\sqrt{144}$ ildizdan nechchi chiqadi?", "options": ["12", "14", "11", "16"], "answer": "12"},
+            {"id": 3, "question": r"$\sqrt{144}$ ildizdan nechchi chiqadi?", "options": ["12", "14", "11", "16"], "answer": "12"},
             {"id": 4, "question": "20% ning 150 ga teng qiymatini toping.", "options": ["30", "20", "15", "45"], "answer": "30"},
-            {"id": 5, "question": "2 ning 5-darajasi ($2^5$) nechaga teng?", "options": ["32", "16", "64", "10"], "answer": "32"},
-            {"id": 6, "question": "Aylananing yuzasi formulasi qaysi?", "options": ["$\pi r^2$", "$2\pi r$", "$a^2$", "$a \cdot b$"], "answer": "$\\pi r^2$"},
+            {"id": 5, "question": r"2 ning 5-darajasi ($2^5$) nechaga teng?", "options": ["32", "16", "64", "10"], "answer": "32"},
+            {"id": 6, "question": r"Aylananing yuzasi formulasi qaysi?", "options": [r"$\pi r^2$", r"$2\pi r$", r"$a^2$", r"$a \cdot b$"], "answer": r"$\pi r^2$"},
             {"id": 7, "question": "15, 20, 25 sonlarining o'rta arifmetigi?", "options": ["20", "18", "22", "15"], "answer": "20"},
             {"id": 8, "question": "Tenglamani yeching: x / 4 = 12.", "options": ["48", "3", "16", "36"], "answer": "48"},
             {"id": 9, "question": "To'g'ri burchak necha daraja bo'ladi?", "options": ["90", "180", "45", "60"], "answer": "90"},
-            {"id": 10, "question": "3! (3 fakterial) nimaga teng?", "options": ["6", "3", "9", "12"], "answer": "6"}
-        ],
-        "hard": [
-            {"id": 1, "question": "Logarifm $\log_2(32)$ qiymatini toping.", "options": ["5", "4", "6", "16"], "answer": "5"},
-            {"id": 2, "question": "Hosilani toping: $f(x) = x^3 + 2x$. $f'(x) = ?$", "options": ["$3x^2 + 2$", "$x^2 + 2$", "$3x + 2$", "$3x^2$"], "answer": "3x^2 + 2"},
-            {"id": 3, "question": "Geometrik progressiyaning birinchi hadi 3, mahraji 2. 4-hadini toping.", "options": ["24", "12", "48", "18"], "answer": "24"},
-            {"id": 4, "question": "Pifagor teoremasi bo me'yoriy formulasi?", "options": ["$a^2 + b^2 = c^2$", "$a + b = c$", "$a^2 - b^2 = c^2$", "$a \cdot b = c^2$"], "answer": "a^2 + b^2 = c^2"},
-            {"id": 5, "question": "$\sin(90^\circ)$ qiymati nechaga teng?", "options": ["1", "0", "-1", "0.5"], "answer": "1"},
-            {"id": 6, "question": "Diskriminant formulasi $D = ?$", "options": ["$b^2 - 4ac$", "$b^2 + 4ac$", "$2b - ac$", "$a^2 - 4bc$"], "answer": "b^2 - 4ac"},
-            {"id": 7, "question": "Kombinatorika: $C_5^2$ guruhlar sonini toping.", "options": ["10", "20", "5", "15"], "answer": "10"},
-            {"id": 8, "question": "Limitni toping: $\lim_{x \to 0} \frac{\sin(x)}{x}$", "options": ["1", "0", "cheksizlik", "-1"], "answer": "1"},
-            {"id": 9, "question": "Aylana uzunligi $C = 31.4$ sm bo'lsa, radiusi $r$ nechaga teng? ($\pi \approx 3.14$)", "options": ["5 sm", "10 sm", "2.5 sm", "7 sm"], "answer": "5 sm"},
-            {"id": 10, "question": "Aralashma masalasi: 10% li 200g va 30% li 100g eritma aralashtirilsa, yangi konsentratsiya?", "options": ["16.6%", "20%", "15%", "25%"], "answer": "16.6%"}
-        ]
-    }
-}
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/api/questions/<category>/<difficulty>')
-def get_questions(category, difficulty):
-    questions = QUESTIONS_DATA.get(category, {}).get(difficulty, [])
-    return jsonify(questions)
-
-if __name__ == '__main__':
-    app.run(debug=True)

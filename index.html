@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TESTLAR OLAMI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- 1-EKRAN: Bosh sahifa -->
+        <div id="home-screen" class="screen active">
+            <h1 class="title">TESTLAR OLAMI</h1>
+            
+            <div class="field-group">
+                <label>Testlar kategoriyasini tanlang</label>
+                <select id="category-select">
+                    <option value="english">Ingliz tili</option>
+                    <option value="math">Matematika</option>
+                </select>
+            </div>
+
+            <div class="field-group">
+                <label>Qiyinchilik darajasi</label>
+                <select id="difficulty-select">
+                    <option value="easy">Oson</option>
+                    <option value="medium">O'rta</option>
+                    <option value="hard">Qiyin</option>
+                </select>
+            </div>
+
+            <button class="btn btn-purple" id="start-btn">Boshlash</button>
+        </div>
+
+        <!-- 2-EKRAN: Test sahifasi -->
+        <div id="quiz-screen" class="screen">
+            <div class="quiz-header">
+                <span class="badge" id="question-tracker">Savol 1/10</span>
+                <span class="badge timer" id="timer">Vaqt: 01:30</span>
+            </div>
+
+            <div class="question-box" id="question-text">
+                Qandaydir savol?
+            </div>
+
+            <div class="options-container" id="options-container">
+                <!-- Variantlar -->
+            </div>
+
+            <button class="btn btn-purple" id="next-btn">Keyingisi</button>
+        </div>
+
+        <!-- 3-EKRAN: Natijalar sahifasi -->
+        <div id="result-screen" class="screen">
+            <h2 class="title-small">Test yakunlandi</h2>
+
+            <div class="results-grid">
+                <div class="card yellow-card">
+                    <p>Yakuniy ball</p>
+                    <h3 id="score-val">0</h3>
+                </div>
+                <div class="card yellow-card">
+                    <p>To'g'ri javob</p>
+                    <h3 id="percent-val">0%</h3>
+                </div>
+            </div>
+
+            <button class="btn btn-cyan" id="review-btn">Xatolarni ko'rish</button>
+            <button class="btn btn-red" id="retry-btn">Qayta urinish</button>
+            <button class="btn btn-orange" id="home-btn">Bosh sahifa</button>
+        </div>
+
+        <!-- XATOLARNI KO'RISH OYNASI -->
+        <div id="review-modal" class="modal">
+            <div class="modal-content">
+                <h3>Xatolar va Javoblar</h3>
+                <div id="review-list"></div>
+                <button class="btn btn-purple" id="close-review-btn">Yopish</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

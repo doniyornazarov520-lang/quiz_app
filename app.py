@@ -66,3 +66,32 @@ QUESTIONS_DATA = {
             {"id": 7, "question": "15, 20, 25 sonlarining o'rta arifmetigi?", "options": ["20", "18", "22", "15"], "answer": "20"},
             {"id": 8, "question": "Tenglamani yeching: x / 4 = 12.", "options": ["48", "3", "16", "36"], "answer": "48"},
             {"id": 9, "question": "To'g'ri burchak necha daraja bo'ladi?", "options": ["90", "180", "45", "60"], "answer": "90"},
+            {"id": 10, "question": "3! (3 fakterial) nimaga teng?", "options": ["6", "3", "9", "12"], "answer": "6"}
+        ],
+        "hard": [
+            {"id": 1, "question": r"Logarifm $\log_2(32)$ qiymatini toping.", "options": ["5", "4", "6", "16"], "answer": "5"},
+            {"id": 2, "question": r"Hosilani toping: $f(x) = x^3 + 2x$. $f'(x) = ?$", "options": [r"$3x^2 + 2$", r"$x^2 + 2$", r"$3x + 2$", r"$3x^2$"], "answer": r"$3x^2 + 2$"},
+            {"id": 3, "question": "Geometrik progressiyaning birinchi hadi 3, mahraji 2. 4-hadini toping.", "options": ["24", "12", "48", "18"], "answer": "24"},
+            {"id": 4, "question": r"Pifagor teoremasi me'yoriy formulasi?", "options": [r"$a^2 + b^2 = c^2$", r"$a + b = c$", r"$a^2 - b^2 = c^2$", r"$a \cdot b = c^2$"], "answer": r"$a^2 + b^2 = c^2$"},
+            {"id": 5, "question": r"$\sin(90^\circ)$ qiymati nechaga teng?", "options": ["1", "0", "-1", "0.5"], "answer": "1"},
+            {"id": 6, "question": r"Diskriminant formulasi $D = ?$", "options": [r"$b^2 - 4ac$", r"$b^2 + 4ac$", r"$2b - ac$", r"$a^2 - 4bc$"], "answer": r"$b^2 - 4ac$"},
+            {"id": 7, "question": r"Kombinatorika: $C_5^2$ guruhlar sonini toping.", "options": ["10", "20", "5", "15"], "answer": "10"},
+            {"id": 8, "question": r"Limitni toping: $\lim_{x \to 0} \frac{\sin(x)}{x}$", "options": ["1", "0", "cheksizlik", "-1"], "answer": "1"},
+            {"id": 9, "question": r"Aylana uzunligi $C = 31.4$ sm bo'lsa, radiusi $r$ nechaga teng? ($\pi \approx 3.14$)", "options": ["5 sm", "10 sm", "2.5 sm", "7 sm"], "answer": "5 sm"},
+            {"id": 10, "question": "Aralashma masalasi: 10% li 200g va 30% li 100g eritma aralashtirilsa, yangi konsentratsiya?", "options": ["16.6%", "20%", "15%", "25%"], "answer": "16.6%"}
+        ]
+    }
+}
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/api/questions/<category>/<difficulty>')
+def get_questions(category, difficulty):
+    questions = QUESTIONS_DATA.get(category, {}).get(difficulty, [])
+    return jsonify(questions)
+
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
